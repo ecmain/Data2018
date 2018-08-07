@@ -1,6 +1,8 @@
 ## Install the tidycensus package if you haven't yet
 #install.packages("tidycensus")
 
+# This is Kevin's comments on your code! Haha!
+
 library(tidycensus)
 library(ggplot2)
 library(dplyr)
