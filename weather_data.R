@@ -10,21 +10,7 @@ weather_df <- weather_raw %>%
 
 print(weather_df)
 
-input_file <- "data/Hawthorne Tilikum Steel daily bike counts 073118.xlsx"
-bridge_name <- "Hawthorne"
-
-# define a funtion that load bike counts data
-load_data <- function(input_file, bridge_name) {
-  bikecounts <- read_excel(input_file,
-                           sheet = bridge_name,
-                           skip = 1)
-  bikecounts$name <- bridge_name
-  bikecounts
-}
-
-Tilikum <- load_data(input_file, "Tilikum")
-Hawthorne <- load_data(input_file, "Hawthorne")
-Steele <- load_data(input_file, "Steel")
+source("load_data.R")
 
 bike_weather <- bikecounts %>% 
   mutate(date=as_date(date)) %>% 
