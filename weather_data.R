@@ -26,8 +26,6 @@ Tilikum <- load_data(input_file, "Tilikum")
 Hawthorne <- load_data(input_file, "Hawthorne")
 Steele <- load_data(input_file, "Steel")
 
-print(bikecounts)
-
 bike_weather <- bikecounts %>% 
   mutate(date=as_date(date)) %>% 
   left_join(weather_df) %>% 
@@ -68,11 +66,17 @@ gap_nested[[1, "data"]]
 
 library(purrr)
 library(broom)
-model_df <- gap_nested %>% 
+model_df_glance <- gap_nested %>% 
   mutate(fit=map(data, ~lm(total ~ TMIN+TMAX+PRCP, data=.)),
          glance=map(fit, glance)
          ) %>%
   unnest(glance) %>% 
   print()
 
-model_df
+model_df_tidy <- gap_nested %>% 
+  mutate(fit=map(data, ~lm(total ~ TMIN+TMAX+PRCP, data=.)),
+         tidy=map(fit, tidy)
+  ) %>%
+  unnest(tidy) %>% 
+  print()
+
